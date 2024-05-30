@@ -39,6 +39,6 @@ def convert_pdfs_and_docs(path):
 
 
 if __name__ == '__main__':
-    config = yaml.safe_load(open('config.yml'))
-    convert_supporting_documentation(config['save_path'])
+    config = yaml.safe_load(open('../config.yml'))
+    convert_supporting_documentation(f"../{config['save_path']}/supporting-documentation")
 
