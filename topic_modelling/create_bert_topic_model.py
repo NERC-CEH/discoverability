@@ -14,7 +14,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from bertopic.representation import KeyBERTInspired, PartOfSpeech, MaximalMarginalRelevance
 
 
-def create_bert_topic_model(data_file):
+def create_bert_topic_model(data_file, output):
     print('Loading texts...')
     texts = load_eidc_data.load_title_description_lineage(data_file)
     print('Creating embeddings...')
@@ -24,12 +24,16 @@ def create_bert_topic_model(data_file):
     print('Fitting topic model...')
     topics, probs = topic_model.fit_transform(texts, embeddings)
     print(topic_model.get_topic_info())
-    #topic_model.visualize_document_datamap(texts, embeddings=embeddings)
+    print('Creating visualisation...')
+    fig = topic_model.visualize_document_datamap(texts, embeddings=embeddings)
+    fig.savefig(f'{output}/topic_datamap.png', bbox_inches='tight')
+
 
 def create_embeddings(texts):
     embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
     embeddings = embedding_model.encode(texts)
     return embedding_model, embeddings
+
 
 def create_topic_model(embedding_model):
     umap_model = UMAP(n_neighbors=15, n_components=5, min_dist=0.0, metric='cosine', random_state=42)
@@ -53,6 +57,7 @@ def create_topic_model(embedding_model):
         verbose=True
     )
 
+
 if __name__ == '__main__':
     config = yaml.safe_load(open('../config.yml'))
-    create_bert_topic_model(f"../{config['metadata_file']}")
+    create_bert_topic_model(f"../{config['metadata_file']}", f"../{config['save_path']}")
