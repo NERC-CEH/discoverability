@@ -13,6 +13,6 @@ def download_and_save_catalogue_metadata(url, output_file):
 
 
 if __name__ == '__main__':
-    config = yaml.safe_load(open('config.yml'))
-    download_and_save_catalogue_metadata(config['url'], config['metadata_file'])
+    config = yaml.safe_load(open('../config.yml'))
+    download_and_save_catalogue_metadata(config['metadata_url'], config['metadata_file'])
     
