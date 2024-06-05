@@ -1,0 +1,4 @@
+metadata_url: https://catalogue.ceh.ac.uk/eidc/documents
+supporting_url: https://data-package.ceh.ac.uk/sd/
+metadata_file: data/catalogue_metadata.json
+save_path: data

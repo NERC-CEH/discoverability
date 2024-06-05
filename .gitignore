@@ -1,3 +1,8 @@
+util/supporting-documentation
+*.zip
+*.png
+data
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
