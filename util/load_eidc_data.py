@@ -3,7 +3,6 @@ import pandas as pd
 
 
 def load_title_description_lineage(file_path):
-    titles = []
     texts = []
     with open(file_path, 'r') as f:
         data = json.load(f)
@@ -11,9 +10,8 @@ def load_title_description_lineage(file_path):
             desc = item['description']
             title = item['title']
             lineage = item['lineage']
-            titles.append(title)
             texts.append(f'{title}\n{desc}\n{lineage}')
-    return texts, titles
+    return texts
 
 
 def load_as_df(file_path, fields=['title', 'description', 'lineage']):
